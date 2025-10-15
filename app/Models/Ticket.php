@@ -3,13 +3,17 @@
 namespace App\Models;
 
 use App\Enums\TicketStatusEnum;
+use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\InteractsWithMedia;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Ticket extends Model
+class Ticket extends Model implements HasMedia
 {
     use HasFactory;
+
+    use InteractsWithMedia;
 
     protected $fillable = [
         'subject',

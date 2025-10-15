@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Data\TicketData;
 use Illuminate\Validation\Rules\File;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -29,9 +30,13 @@ class TicketRequest extends FormRequest
     {
         return [
             'files.*.max'        => 'Each file must not be greater than 5 MB.',
-            'files.*.mimes'      => 'Each file must have one of the following extensions: jpg, jpeg, png, pdf, doc, docx, xls, xlsx, txt, zip.',
             'files.*.extensions' => 'Each file must have one of the following extensions: jpg, jpeg, png, pdf, doc, docx, xls, xlsx, txt, zip.',
             'phone.regex'        => 'Please enter a valid phone number in E.164 format.',
         ];
+    }
+
+    public function toData(): TicketData
+    {
+        return TicketData::from($this->validated());
     }
 }

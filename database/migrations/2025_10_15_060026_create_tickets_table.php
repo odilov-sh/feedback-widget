@@ -13,7 +13,7 @@ return new class extends Migration {
             $table->string('subject');
             $table->text('text');
             $table->string('status');
-            $table->timestamp('responded_at');
+            $table->timestamp('responded_at')->nullable();
             $table->timestamps();
         });
     }
