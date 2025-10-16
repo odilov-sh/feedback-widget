@@ -46,7 +46,7 @@ class TicketService
         foreach ($files as $file) {
             $path = $file->store('ticket-files');
 
-            $ticket->addMediaFromDisk($path)->toMediaCollection('ticket-files');
+            $ticket->addMediaFromDisk($path)->toMediaCollection();
         }
     }
 
