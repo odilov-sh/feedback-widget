@@ -4,13 +4,8 @@
     <meta charset="UTF-8">
     <title>Feedback Widget</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <!-- ✅ Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- ✅ jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-
     <style>
         body {
             background: #f8f9fa;
@@ -24,7 +19,6 @@
     </style>
 </head>
 <body>
-
 <div class="widget-container">
     <div class="card shadow-sm">
         <div class="card-body">
@@ -183,7 +177,6 @@
     });
 </script>
 
-<!-- ✅ Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>

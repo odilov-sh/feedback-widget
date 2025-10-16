@@ -32,7 +32,7 @@ class Ticket extends Model implements HasMedia
     protected function casts(): array
     {
         return [
-            'responded_at' => 'timestamp',
+            'responded_at' => 'datetime',
             'status'       => TicketStatusEnum::class,
         ];
     }
