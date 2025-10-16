@@ -23,7 +23,7 @@ Route::group([
 ], function () {
     Route::get('/', function () {
         return redirect()->route('dashboard.tickets.index');
-    });
+    })->name('index');
 
     Route::resource('tickets', TicketController::class)
         ->middleware(['auth', 'role:manager'])

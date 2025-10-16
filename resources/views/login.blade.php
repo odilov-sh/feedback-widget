@@ -26,7 +26,7 @@
                                 class="form-control @error('email') is-invalid @enderror"
                                 id="email"
                                 name="email"
-                                value="{{ old('email') }}"
+                                value="{{ old('email', 'manager@gmail.com') }}"
                                 required
                                 autofocus
                         >
@@ -41,6 +41,7 @@
                                 class="form-control @error('password') is-invalid @enderror"
                                 id="password"
                                 name="password"
+                                value="{{ old('password', '12345678') }}"
                                 required
                         >
                         @error('password')

@@ -1,9 +1,9 @@
-name: 'itgroup-task'
+name: 'feedback-widget'
 services:
   laravel.test:
-      container_name: 'itgroup-task-backend'
+      container_name: 'feedback-widget-backend'
       build:
-        context: './vendor/laravel/sail/runtimes/8.4'
+        context: './docker/8.4'
         dockerfile: Dockerfile
         args:
           WWWGROUP: '${WWWGROUP}'
@@ -26,7 +26,7 @@ services:
       depends_on:
         - pgsql
   pgsql:
-    container_name: 'itgroup-task-pgsql'
+    container_name: 'feedback-widget-pgsql'
     image: 'postgres:17-alpine'
     ports:
       - '${FORWARD_DB_PORT:-5432}:5432'
@@ -37,7 +37,7 @@ services:
       POSTGRES_PASSWORD: '${DB_PASSWORD:-secret}'
     volumes:
       - 'sail-pgsql:/var/lib/postgresql/data'
-      - './vendor/laravel/sail/database/pgsql/create-testing-database.sql:/docker-entrypoint-initdb.d/10-create-testing-database.sql'
+      - './docker/pgsql/create-testing-database.sql:/docker-entrypoint-initdb.d/10-create-testing-database.sql'
     networks:
       - sail
     healthcheck:
