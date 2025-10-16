@@ -1,0 +1,140 @@
+openapi: 3.0.3
+info:
+  title: Support Ticket API
+  version: 1.0.0
+  description: >
+    This API allows users to submit support tickets and retrieve basic ticket statistics.
+
+servers:
+  - url: http://localhost
+    description: Local development server
+  - url: https://api.yourdomain.com
+    description: Production server
+
+tags:
+  - name: Tickets
+    description: Endpoints related to support tickets
+
+paths:
+  /api/tickets:
+    post:
+      tags:
+        - Tickets
+      summary: Create a new support ticket
+      description: Submit a new ticket with contact details, message, and optional attachments.
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+                - name
+                - email
+                - phone
+                - subject
+                - text
+              properties:
+                name:
+                  type: string
+                  maxLength: 255
+                  example: John Doe
+                  description: Full name of the user submitting the ticket
+                email:
+                  type: string
+                  format: email
+                  maxLength: 255
+                  example: johndoe@example.com
+                  description: Email address of the user
+                phone:
+                  type: string
+                  pattern: '^\+[1-9]\d{1,14}$'
+                  example: '+1234567890'
+                  description: Phone number in international E.164 format
+                subject:
+                  type: string
+                  maxLength: 255
+                  example: Website not loading
+                  description: Short subject or title of the issue
+                text:
+                  type: string
+                  example: The website fails to load when accessed via Chrome browser.
+                  description: Detailed message describing the issue
+                files:
+                  type: array
+                  maxItems: 5
+                  description: Optional file attachments (max 5 files, up to 5MB each)
+                  items:
+                    type: string
+                    format: binary
+                    description: File upload (jpg, jpeg, png, pdf, doc, docx, xls, xlsx, txt, zip)
+      responses:
+        '201':
+          description: Ticket successfully created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Ticket created successfully
+                  ticket_id:
+                    type: integer
+                    example: 101
+        '422':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: The given data was invalid.
+                  errors:
+                    type: object
+                    additionalProperties:
+                      type: array
+                      items:
+                        type: string
+                    example:
+                      email:
+                        - The email field is required.
+
+  /api/tickets/statistics:
+    get:
+      tags:
+        - Tickets
+      summary: Get ticket statistics
+      description: Returns total ticket counts for today, this week, and this month.
+      responses:
+        '200':
+          description: Successful response containing ticket statistics
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  today:
+                    type: integer
+                    example: 5
+                    description: Number of tickets created today
+                  week:
+                    type: integer
+                    example: 24
+                    description: Number of tickets created this week
+                  month:
+                    type: integer
+                    example: 103
+                    description: Number of tickets created this month
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.

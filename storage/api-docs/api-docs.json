@@ -1,0 +1,145 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Support Ticket API",
+        "description": "API documentation for the Feedback-Ticket system built with Laravel",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost",
+            "description": "Local development server"
+        }
+    ],
+    "paths": {
+        "/api/tickets": {
+            "post": {
+                "tags": [
+                    "Tickets"
+                ],
+                "summary": "Create a new support ticket",
+                "description": "Submits a new ticket with contact details, message, and optional attachments.",
+                "operationId": "ff13d783778eb63749699831c6849b41",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "email",
+                                    "phone",
+                                    "subject",
+                                    "text"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "description": "Customer name",
+                                        "type": "string",
+                                        "maxLength": 255,
+                                        "example": "John Doe"
+                                    },
+                                    "email": {
+                                        "description": "Customer email",
+                                        "type": "string",
+                                        "format": "email",
+                                        "maxLength": 255
+                                    },
+                                    "phone": {
+                                        "description": "Phone number in international E.164 format",
+                                        "type": "string",
+                                        "pattern": "^\\+[1-9]\\d{1,14}$",
+                                        "example": "+1234567890"
+                                    },
+                                    "subject": {
+                                        "description": "Short subject or title of the issue",
+                                        "type": "string",
+                                        "maxLength": 255
+                                    },
+                                    "text": {
+                                        "description": "Detailed message describing the issue",
+                                        "type": "string"
+                                    },
+                                    "files": {
+                                        "description": "Optional file attachments (max 5 files, up to 5MB each)",
+                                        "type": "array",
+                                        "items": {
+                                            "description": "File upload (jpg, jpeg, png, pdf, doc, docx, xls, xlsx, txt, zip)",
+                                            "type": "string",
+                                            "format": "binary"
+                                        },
+                                        "maxItems": 5
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Ticket successfully created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Your feedback has been sent successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/tickets/statistics": {
+            "get": {
+                "tags": [
+                    "Tickets"
+                ],
+                "summary": "Get ticket statistics",
+                "description": "Returns total ticket counts for today, this week, and this month.",
+                "operationId": "f2a68346ef4810e34b76ab6fb43c4586",
+                "responses": {
+                    "200": {
+                        "description": "Successful response containing ticket statistics",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "today": {
+                                            "description": "Number of tickets created today",
+                                            "type": "integer",
+                                            "example": 5
+                                        },
+                                        "week": {
+                                            "description": "Number of tickets created this week",
+                                            "type": "integer",
+                                            "example": 24
+                                        },
+                                        "month": {
+                                            "description": "Number of tickets created this month",
+                                            "type": "integer",
+                                            "example": 103
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Tickets",
+            "description": "Tickets"
+        }
+    ]
+}

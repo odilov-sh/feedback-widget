@@ -72,7 +72,7 @@ After successfully setting up the project and running it locally, follow these s
 | `GET`  | `/api/tickets/statistics` | Retrieve ticket statistics |
 
 To explore full api documentation, visit:  
-👉 **`/api-doc`**
+👉 **`/api/documentation`**
 
 ## 💬 Feedback Widget
 
