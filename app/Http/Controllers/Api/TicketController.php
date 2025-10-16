@@ -20,4 +20,11 @@ class TicketController extends Controller
             'message' => 'Your feedback has been sent successfully.',
         ]);
     }
+
+    public function statistics()
+    {
+        $data = $this->ticketService->statistics();
+
+        return response()->json($data);
+    }
 }

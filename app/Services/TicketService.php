@@ -38,15 +38,22 @@ class TicketService
         });
     }
 
+    public function statistics(): array
+    {
+        return [
+            'today' => Ticket::today()->count(),
+            'week'  => Ticket::thisWeek()->count(),
+            'month' => Ticket::thisMonth()->count(),
+        ];
+    }
+
     /**
-     * @param  UploadedFile[]|null  $files
+     * @param  UploadedFile[]  $files
      */
     private function saveFiles(Ticket $ticket, array $files): void
     {
         foreach ($files as $file) {
-            $path = $file->store('ticket-files');
-
-            $ticket->addMediaFromDisk($path)->toMediaCollection();
+            $ticket->addMedia($file)->toMediaCollection();
         }
     }
 

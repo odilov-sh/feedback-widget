@@ -47,28 +47,28 @@
             <form id="feedbackForm" enctype="multipart/form-data">
 
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-sm-6">
                         <div class="mb-2">
                             <label class="form-label">Name</label>
                             <input name="name" class="form-control" required>
                             <div class="invalid-feedback"></div>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-sm-6">
                         <div class="mb-3">
                             <label class="form-label">Phone</label>
                             <input name="phone" class="form-control" required>
                             <div class="invalid-feedback"></div>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-sm-6">
                         <div class="mb-3">
                             <label class="form-label">Email</label>
                             <input name="email" type="email" class="form-control" required>
                             <div class="invalid-feedback"></div>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-sm-6">
                         <div class="mb-3">
                             <label class="form-label">Subject</label>
                             <input name="subject" class="form-control" required>

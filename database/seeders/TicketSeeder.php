@@ -14,7 +14,7 @@ class TicketSeeder extends Seeder
             $count = fake()->numberBetween(1, 3);
 
             Ticket::factory($count)
-                ->hasFile()
+                ->hasFile(fake()->boolean())
                 ->create([
                     'customer_id' => $customer->id,
                 ]);
