@@ -20,7 +20,12 @@
     <div class="container my-5">
         <h2 class="mb-4 fw-semibold text-center">Tickets</h2>
 
+        @include('tickets._filters')
+
+
         <div class="table-responsive shadow-sm bg-white">
+
+
             <table class="table table-striped table-bordered align-middle mb-0">
                 <thead class="table-primary">
                 <tr>
@@ -35,7 +40,6 @@
                 </tr>
                 </thead>
                 <tbody>
-
                 @foreach($tickets as $ticket)
                     <tr>
                         <td>{{ $ticket->id }}</td>
@@ -54,14 +58,6 @@
                                class="btn btn-sm btn-info text-white">
                                 <i class="bi bi-eye"></i> View
                             </a>
-                            <form action="{{ route('dashboard.tickets.destroy', $ticket) }}" method="POST"
-                                  class="d-inline">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-sm btn-danger">
-                                    <i class="bi bi-trash"></i> Delete
-                                </button>
-                            </form>
                         </td>
                     </tr>
                 @endforeach

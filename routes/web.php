@@ -27,7 +27,7 @@ Route::group([
 
     Route::resource('tickets', TicketController::class)
         ->middleware(['auth', 'role:manager'])
-        ->only(['index', 'show', 'destroy']);
+        ->only(['index', 'show']);
 
     Route::put('tickets/{ticket}/change-status', [TicketController::class, 'changeStatus'])
         ->name('tickets.change-status');

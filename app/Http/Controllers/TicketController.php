@@ -6,18 +6,19 @@ use App\Models\Ticket;
 use Illuminate\Http\Request;
 use App\Enums\TicketStatusEnum;
 use Illuminate\Validation\Rule;
-use App\Services\DashboardTicketService;
+use App\Data\TicketFilterRequestData;
+use App\Repositories\TicketRepository;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class TicketController extends Controller
 {
     public function __construct(
-        private DashboardTicketService $dashboardTicketService,
+        private TicketRepository $ticketRepository,
     ) {}
 
-    public function index()
+    public function index(TicketFilterRequestData $data)
     {
-        $tickets = $this->dashboardTicketService->tickets();
+        $tickets = $this->ticketRepository->getTickets($data);
 
         return view('tickets.index', compact('tickets'));
     }
@@ -25,13 +26,6 @@ class TicketController extends Controller
     public function show(Ticket $ticket)
     {
         return view('tickets.show', compact('ticket'));
-    }
-
-    public function destroy(Ticket $ticket)
-    {
-        $ticket->delete();
-
-        return redirect()->route('dashboard.tickets.index');
     }
 
     public function changeStatus(Ticket $ticket, Request $request)
