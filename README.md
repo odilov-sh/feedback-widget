@@ -49,10 +49,6 @@ You can set up the project in one of two ways:
 4. **Open in your browser:**
    http://localhost
 
-#$ Next Steps After Installation
-
-After successfully setting up the project and running it locally, follow these steps to explore and test the application.
-
 ---
 
 ## **Admin Panel (for Managers)**
@@ -86,3 +82,9 @@ Add the following iframe to your website HTML:
 ### **View Example**
 To view widget example, visit:  
 👉 **`/view-widget`**
+
+## Tests
+Run following command
+```bash
+    php artisan test
+```
