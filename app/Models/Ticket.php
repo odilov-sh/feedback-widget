@@ -39,16 +39,16 @@ class Ticket extends Model implements HasMedia
 
     public function scopeToday(Builder $query): void
     {
-        $query->whereDate('created_at', today());
+        $query->whereDate('tickets.created_at', today());
     }
 
     public function scopeThisWeek(Builder $query): void
     {
-        $query->whereBetween('created_at', [now()->startOfWeek(), now()->endOfWeek()]);
+        $query->whereBetween('tickets.created_at', [now()->startOfWeek(), now()->endOfWeek()]);
     }
 
     public function scopeThisMonth(Builder $query): void
     {
-        $query->whereBetween('created_at', [now()->startOfMonth(), now()->endOfMonth()]);
+        $query->whereBetween('tickets.created_at', [now()->startOfMonth(), now()->endOfMonth()]);
     }
 }

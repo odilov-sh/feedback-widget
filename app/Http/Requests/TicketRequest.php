@@ -4,6 +4,8 @@ namespace App\Http\Requests;
 
 use App\Data\TicketData;
 use Illuminate\Validation\Rules\File;
+use App\Rules\LimitTicketsByEmailRule;
+use App\Rules\LimitTicketsByPhoneRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class TicketRequest extends FormRequest
@@ -12,8 +14,8 @@ class TicketRequest extends FormRequest
     {
         return [
             'name'    => ['required', 'string', 'max:255'],
-            'email'   => ['required', 'email', 'max:255'],
-            'phone'   => ['required', 'string', 'regex:/^\+[1-9]\d{1,14}$/'],
+            'email'   => ['required', 'email', 'max:255', new LimitTicketsByEmailRule],
+            'phone'   => ['required', 'string', 'regex:/^\+[1-9]\d{1,14}$/', new LimitTicketsByPhoneRule],
             'subject' => ['required', 'string', 'max:255'],
             'text'    => ['required', 'string'],
             'files'   => ['nullable', 'array', ' max:5'],
